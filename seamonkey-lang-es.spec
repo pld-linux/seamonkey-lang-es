@@ -37,8 +37,7 @@ Recursos españoles para SeaMonkey.
 Hiszpañskie pliki jêzykowe dla SeaMonkeya.
 
 %prep
-%setup -q -c -T
-unzip %{SOURCE0}
+%setup -q -c
 unzip -o %{SOURCE1}
 unzip -o %{SOURCE2}
 install %{SOURCE3} .
