@@ -11,7 +11,9 @@ Source0:	http://sunsite.rediris.es/mirror/NAVE/seamonkey/%{version}/descargas/se
 # Source0-md5:	f2d8e9c61ead16eaee93557661698b4f
 Source1:	http://sunsite.rediris.es/mirror/NAVE/seamonkey/%{version}/descargas/seamonkey-%{version}.es-ES.regpack.xpi
 # Source1-md5:	6cd431a3ea92547e0c15e22585ecb498
-Source2:	gen-installed-chrome.sh
+Source2:	http://www.mozilla-enigmail.org/downloads/lang/0.9x/enigmail-es-ES-0.9x.xpi
+# Source2-md5:	4e147df61d36030bb2754ab702da8491
+Source3:	gen-installed-chrome.sh
 URL:		http://nave.hispalinux.es/
 BuildRequires:	unzip
 Requires(post,postun):	seamonkey >= %{version}
@@ -37,10 +39,13 @@ Hiszpañskie pliki jêzykowe dla SeaMonkeya.
 %prep
 %setup -q -c -T
 unzip %{SOURCE0}
-rm install.js
-unzip %{SOURCE1}
-install %{SOURCE2} .
-./gen-installed-chrome.sh locale bin/chrome/{ES,es-ES,es-unix}.jar > lang-es-installed-chrome.txt
+unzip -o %{SOURCE1}
+unzip -o %{SOURCE2}
+install %{SOURCE3} .
+./gen-installed-chrome.sh locale bin/chrome/{ES,es-ES,es-unix}.jar \
+	> lang-es-installed-chrome.txt
+./gen-installed-chrome.sh locale chrome/enigmail-es-ES.jar \
+	>> lang-es-installed-chrome.txt
 rm bin/searchplugins/{dmoz,google,jeeves}.*
 
 %install
@@ -48,6 +53,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_chromedir}
 
 install bin/chrome/{ES,es-ES,es-unix}.jar $RPM_BUILD_ROOT%{_chromedir}
+install chrome/enigmail-es-ES.jar $RPM_BUILD_ROOT%{_chromedir}
 install lang-es-installed-chrome.txt $RPM_BUILD_ROOT%{_chromedir}
 cp -r bin/searchplugins $RPM_BUILD_ROOT%{_datadir}/seamonkey
 
@@ -65,5 +71,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_chromedir}/ES.jar
 %{_chromedir}/es-ES.jar
 %{_chromedir}/es-unix.jar
+%{_chromedir}/enigmail-es-ES.jar
 %{_chromedir}/lang-es-installed-chrome.txt
 %{_datadir}/seamonkey/searchplugins/*
