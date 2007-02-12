@@ -2,9 +2,9 @@
 %define	_reg	ES
 %define	_lare	%{_lang}-%{_reg}
 Summary:	Spanish resources for SeaMonkey
-Summary(ca):	Recursos espanyols per a SeaMonkey
-Summary(es):	Recursos españoles para SeaMonkey
-Summary(pl):	Hiszpañskie pliki jêzykowe dla SeaMonkeya
+Summary(ca.UTF-8):   Recursos espanyols per a SeaMonkey
+Summary(es.UTF-8):   Recursos espaÃ±oles para SeaMonkey
+Summary(pl.UTF-8):   HiszpaÅ„skie pliki jÄ™zykowe dla SeaMonkeya
 Name:		seamonkey-lang-es
 Version:	1.1
 Release:	1
@@ -29,14 +29,14 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Spanish resources for SeaMonkey.
 
-%description -l ca
+%description -l ca.UTF-8
 Recursos espanyols per a SeaMonkey.
 
-%description -l es
-Recursos españoles para SeaMonkey.
+%description -l es.UTF-8
+Recursos espaÃ±oles para SeaMonkey.
 
-%description -l pl
-Hiszpañskie pliki jêzykowe dla SeaMonkeya.
+%description -l pl.UTF-8
+HiszpaÅ„skie pliki jÄ™zykowe dla SeaMonkeya.
 
 %prep
 %setup -q -c
