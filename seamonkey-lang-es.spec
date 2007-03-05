@@ -1,22 +1,26 @@
+%define	_lang	es
+%define	_reg	ES
+%define	_lare	%{_lang}-%{_reg}
 Summary:	Spanish resources for SeaMonkey
 Summary(ca):	Recursos espanyols per a SeaMonkey
 Summary(es):	Recursos españoles para SeaMonkey
 Summary(pl):	Hiszpañskie pliki jêzykowe dla SeaMonkeya
 Name:		seamonkey-lang-es
-Version:	1.0
+Version:	1.1.1
 Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
-Source0:	http://sunsite.rediris.es/mirror/NAVE/seamonkey/%{version}/descargas/seamonkey-%{version}.es-ES.langpack.xpi
-# Source0-md5:	f2d8e9c61ead16eaee93557661698b4f
-Source1:	http://sunsite.rediris.es/mirror/NAVE/seamonkey/%{version}/descargas/seamonkey-%{version}.es-ES.regpack.xpi
-# Source1-md5:	6cd431a3ea92547e0c15e22585ecb498
+Source0:	ftp://ftp.task.gda.pl/pub/mozilla/seamonkey/releases/%{version}/contrib-localized//seamonkey-%{version}.%{_lare}.langpack.xpi
+# Source0-md5:	e1311e9bdda8763ab98479fc60c1000e
+Source1:	http://www.mozilla-enigmail.org/downloads/lang/0.9x/enigmail-%{_lare}-0.9x.xpi
+# Source1-md5:	4e147df61d36030bb2754ab702da8491
 Source2:	gen-installed-chrome.sh
 URL:		http://nave.hispalinux.es/
 BuildRequires:	unzip
 Requires(post,postun):	seamonkey >= %{version}
 Requires(post,postun):	textutils
 Requires:	seamonkey >= %{version}
+Obsoletes:	mozilla-lang-es
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -35,21 +39,20 @@ Recursos españoles para SeaMonkey.
 Hiszpañskie pliki jêzykowe dla SeaMonkeya.
 
 %prep
-%setup -q -c -T
-unzip %{SOURCE0}
-rm install.js
-unzip %{SOURCE1}
+%setup -q -c
+%{__unzip} -o -qq %{SOURCE1}
 install %{SOURCE2} .
-./gen-installed-chrome.sh locale bin/chrome/{ES,es-ES,es-unix}.jar > lang-es-installed-chrome.txt
-rm bin/searchplugins/{dmoz,google,jeeves}.*
+./gen-installed-chrome.sh locale \
+	chrome/{%{_lare},%{_lang}-unix,enigmail-%{_lare}}.jar \
+		> lang-%{_lang}-installed-chrome.txt
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_chromedir}
 
-install bin/chrome/{ES,es-ES,es-unix}.jar $RPM_BUILD_ROOT%{_chromedir}
-install lang-es-installed-chrome.txt $RPM_BUILD_ROOT%{_chromedir}
-cp -r bin/searchplugins $RPM_BUILD_ROOT%{_datadir}/seamonkey
+install chrome/{%{_lare},%{_lang}-unix,enigmail-%{_lare}}.jar \
+	$RPM_BUILD_ROOT%{_chromedir}
+install lang-%{_lang}-installed-chrome.txt $RPM_BUILD_ROOT%{_chromedir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -62,8 +65,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{_chromedir}/ES.jar
-%{_chromedir}/es-ES.jar
-%{_chromedir}/es-unix.jar
-%{_chromedir}/lang-es-installed-chrome.txt
-%{_datadir}/seamonkey/searchplugins/*
+%{_chromedir}/%{_lare}.jar
+%{_chromedir}/%{_lang}-unix.jar
+%{_chromedir}/enigmail-%{_lare}.jar
+%{_chromedir}/lang-%{_lang}-installed-chrome.txt
