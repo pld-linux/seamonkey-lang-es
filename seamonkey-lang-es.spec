@@ -6,14 +6,14 @@ Summary(ca.UTF-8):	Recursos espanyols per a SeaMonkey
 Summary(es.UTF-8):	Recursos españoles para SeaMonkey
 Summary(pl.UTF-8):	Hiszpańskie pliki językowe dla SeaMonkeya
 Name:		seamonkey-lang-es
-Version:	1.1.1
+Version:	1.1.2
 Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/contrib-localized//seamonkey-%{version}.%{_lare}.langpack.xpi
-# Source0-md5:	e1311e9bdda8763ab98479fc60c1000e
+# Source0-md5:	e13ac911179b048a3ff57ececc038b89
 Source1:	http://www.mozilla-enigmail.org/downloads/lang/0.9x/enigmail-%{_lare}-0.9x.xpi
-# Source1-md5:	4e147df61d36030bb2754ab702da8491
+# Source1-md5:	b4600f86bce0ab816bb2896a936eecaa
 Source2:	gen-installed-chrome.sh
 URL:		http://nave.hispalinux.es/
 BuildRequires:	unzip
